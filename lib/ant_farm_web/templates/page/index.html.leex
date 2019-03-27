@@ -1,0 +1,13 @@
+<header class="main-header">
+  <h1>Phoenix LiveView AntFarm</h1>
+</header>
+<div class="main-content">
+  <h2>Rendering <%= length(@ants) %> ants...</h2>
+  <svg width="1024" height="600">
+    <rect width="1024" height="600" fill="#00b349"/>
+    <%= for %{position: {x, y}} <- @ants do %>
+      <rect width="2" height="2" fill="#000000" x="<%= x %>" y="<%= y %>"/>
+    <% end %>
+  </svg>
+</div>
+<p>Crafted with ♥ by <a href="https://github.com/bigardone">bigardone</a>. Check the source code.</p>

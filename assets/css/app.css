@@ -1,0 +1,24 @@
+body {
+  font-family: 'Press Start 2P', cursive;
+  margin: 0;
+  font-size: 12px;
+  background: #003d34;
+  color: #94ebd8;
+}
+
+main {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 3px 2px 0px #000000;
+  line-height: 2em;
+}
+
+a {
+  color: #94ebd8;
+}
+
+svg {
+  filter: drop-shadow(3px 2px 0px #000000);
+}
