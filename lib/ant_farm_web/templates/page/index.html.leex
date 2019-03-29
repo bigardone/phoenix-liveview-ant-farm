@@ -3,7 +3,8 @@
 </header>
 <div class="main-content">
   <h2>Rendering <%= length(@ants) %> concurrent ants</h2>
-  <svg width="1024" height="600">
+  <p>PLEASE DO NOT TAP ON GLASS</p>
+  <svg class="panick-<%= @panick %>" phx-click="tap" viewbox="0 0 1024 600">
     <rect width="1024" height="600" fill="#00b349"/>
     <%= for %{position: {x, y}} <- @ants do %>
       <rect width="2" height="2" fill="#000000" x="<%= x %>" y="<%= y %>"/>

@@ -4,6 +4,6 @@ defmodule AntFarmWeb.PageController do
   alias Phoenix.LiveView
 
   def index(conn, _) do
-    LiveView.Controller.live_render(conn, AntFarmWeb.AntFarmView, session: %{})
+    LiveView.Controller.live_render(conn, AntFarmWeb.AntFarmLiveView, session: %{})
   end
 end

@@ -5,8 +5,8 @@ defmodule AntFarm.Ant.Behaviour do
 
   alias AntFarm.Ant.State
 
-  @max_width Application.get_env(:ant_farm, :territory)[:width]
-  @max_height Application.get_env(:ant_farm, :territory)[:height]
+  @max_width Application.get_env(:ant_farm, :colony)[:width]
+  @max_height Application.get_env(:ant_farm, :colony)[:height]
 
   @doc """
   Receives an ant state and takes actions
@@ -22,7 +22,7 @@ defmodule AntFarm.Ant.Behaviour do
   end
 
   def process(%State{state: :walking, focus: 0} = state) do
-    # If loses foucs while walking, it starts resting
+    # If loses focus while walking, it starts resting
     State.start_resting(state)
   end
 
@@ -37,6 +37,26 @@ defmodule AntFarm.Ant.Behaviour do
     |> State.set_velocity(velocity)
     |> State.set_position(position)
   end
+
+  def process(%State{state: :panicking, focus: 0} = state) do
+    # If loses focus while panicking, it starts walking
+    State.start_walking(state)
+  end
+
+  def process(%State{state: :panicking, speed: speed, position: {x, y}} = state) do
+    # If focused on panicking, it keeps panicking, setting the a new velocity if it reaches
+    # the limits, and the position
+    {vx, vy} = velocity = calculate_velocity(state)
+    position = {x + vx * speed, y + vy * speed}
+
+    state
+    |> State.keep_panicking()
+    |> State.set_velocity(velocity)
+    |> State.set_position(position)
+  end
+
+  def panick(%State{state: :panicking} = state), do: state
+  def panick(state), do: State.start_panicking(state)
 
   defp calculate_velocity(%State{position: {x, y}, velocity: {vx, vy}, speed: speed}) do
     new_x = x + vx * speed

@@ -30,7 +30,7 @@ config :phoenix,
   template_engines: [leex: Phoenix.LiveView.Engine]
 
 # AntFarm configuration
-config :ant_farm, territory: [width: 1024, height: 600]
+config :ant_farm, colony: [population: 500, width: 1024, height: 600]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

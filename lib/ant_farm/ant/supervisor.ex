@@ -47,6 +47,15 @@ defmodule AntFarm.Ant.Supervisor do
     |> Enum.map(fn {:ok, state} -> state end)
   end
 
+  @doc """
+  Makes all ants go crazy!
+  """
+  def panick do
+    __MODULE__
+    |> DynamicSupervisor.which_children()
+    |> Enum.each(&do_panick/1)
+  end
+
   defp generate_id do
     @id_length
     |> :crypto.strong_rand_bytes()
@@ -55,5 +64,9 @@ defmodule AntFarm.Ant.Supervisor do
 
   defp get_ant_state({_, pid, _, _}) do
     Ant.get_state(pid)
+  end
+
+  defp do_panick({_, pid, _, _}) do
+    Ant.panick(pid)
   end
 end

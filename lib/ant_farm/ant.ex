@@ -18,6 +18,8 @@ defmodule AntFarm.Ant do
 
   def get_state(pid), do: GenServer.call(pid, :get_state)
 
+  def panick(pid), do: GenServer.cast(pid, :panick)
+
   @impl true
   def init(id) do
     schedule()
@@ -33,6 +35,13 @@ defmodule AntFarm.Ant do
   def handle_info(:perform_actions, state) do
     state = Behaviour.process(state)
     schedule()
+
+    {:noreply, state}
+  end
+
+  @impl true
+  def handle_cast(:panick, state) do
+    state = Behaviour.panick(state)
 
     {:noreply, state}
   end
