@@ -5,8 +5,8 @@ defmodule AntFarm.Ant.Behaviour do
 
   alias AntFarm.Ant.State
 
-  @max_width 1024
-  @max_height 600
+  @max_width Application.get_env(:ant_farm, :territory)[:width]
+  @max_height Application.get_env(:ant_farm, :territory)[:height]
 
   @doc """
   Receives an ant state and takes actions

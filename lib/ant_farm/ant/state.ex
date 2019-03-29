@@ -10,10 +10,10 @@ defmodule AntFarm.Ant.State do
   @walking_state :walking
   @resting_state :resting
   @states [@walking_state, @resting_state]
-  @x_velocities [-1, 0, 1]
-  @y_velocities [-1, 0, 0, 0, 0, 0, 0, 1]
-
+  @velocity [-1, 0, 1]
   @speed 1
+  @width Application.get_env(:ant_farm, :territory)[:width]
+  @height Application.get_env(:ant_farm, :territory)[:height]
 
   @type position :: {integer, integer}
   @type velocity :: {integer, integer}
@@ -38,8 +38,8 @@ defmodule AntFarm.Ant.State do
 
     %State{
       id: id,
-      position: {random_x_position(), random_y_position()},
-      velocity: {random_x_velocity(), random_y_velocity()},
+      position: random_position(),
+      velocity: random_velocity(),
       focus: random_focus(state),
       state: state,
       speed: @speed
@@ -54,7 +54,7 @@ defmodule AntFarm.Ant.State do
       state
       | state: @walking_state,
         focus: random_focus(@walking_state),
-        velocity: {random_x_velocity(), random_y_velocity()}
+        velocity: random_velocity()
     }
 
   @doc """
@@ -98,9 +98,7 @@ defmodule AntFarm.Ant.State do
   defp random_focus(@walking_state), do: :rand.uniform(@max_walking_focus)
   defp random_focus(@resting_state), do: :rand.uniform(@max_resting_focus)
 
-  defp random_x_velocity, do: Enum.random(@x_velocities)
-  defp random_y_velocity, do: Enum.random(@y_velocities)
+  defp random_velocity, do: {Enum.random(@velocity), Enum.random(@velocity)}
 
-  defp random_x_position, do: :rand.uniform(1024)
-  defp random_y_position, do: :rand.uniform(600)
+  defp random_position, do: {:rand.uniform(@width), :rand.uniform(@height)}
 end
