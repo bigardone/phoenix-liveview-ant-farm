@@ -2,7 +2,7 @@
   <h1>Phoenix LiveView Ant Farm</h1>
 </header>
 <div class="main-content">
-  <h2>Rendering <%= length(@ants) %> ants</h2>
+  <h2>Rendering <%= length(@ants) %> concurrent ants</h2>
   <svg width="1024" height="600">
     <rect width="1024" height="600" fill="#00b349"/>
     <%= for %{position: {x, y}} <- @ants do %>
