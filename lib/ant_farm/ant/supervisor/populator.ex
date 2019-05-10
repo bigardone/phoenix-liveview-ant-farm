@@ -13,7 +13,6 @@ defmodule AntFarm.Ant.Supervisor.Populator do
     }
   end
 
-  @doc false
   def start_link(_opts \\ []) do
     AntSupervisor.populate(@population)
     :ignore

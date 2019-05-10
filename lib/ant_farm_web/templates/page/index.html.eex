@@ -1,0 +1,10 @@
+<div class="container">
+  <header class="main-header">
+    <h1>Phoenix LiveView Ant Farm</h1>
+  </header>
+  <%= live_render(@conn, AntFarmWeb.AntFarmLiveView, session: nil, ants: @ants) %>
+  <p>
+    Crafted with ♥ by <a target="_blank" href="https://github.com/bigardone">bigardone</a> |
+    Check out the <a target="_blank" href="https://github.com/bigardone/phoenix-liveview-ant-farm">source code</a>
+  </p>
+</div>

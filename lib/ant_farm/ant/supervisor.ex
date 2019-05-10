@@ -27,9 +27,7 @@ defmodule AntFarm.Ant.Supervisor do
   Starts `count` number of ant processes
   """
   def populate(count \\ 1) do
-    for _ <- 1..count do
-      start_child()
-    end
+    for _ <- 1..count, do: start_child()
   end
 
   @impl true

@@ -7,7 +7,7 @@ defmodule AntFarmWeb.AntFarmLiveView do
 
   @impl true
   def render(assigns) do
-    AntFarmWeb.PageView.render("index.html", assigns)
+    AntFarmWeb.PageView.render("ant_farm.html", assigns)
   end
 
   @impl true
@@ -20,7 +20,7 @@ defmodule AntFarmWeb.AntFarmLiveView do
   @impl true
   def handle_event("tap", _value, socket) do
     Colony.panick()
-    Process.send_after(self(), :end_panick, 1000)
+    Process.send_after(self(), :chill, 1000)
     {:noreply, assign(socket, panick: true)}
   end
 
@@ -30,7 +30,7 @@ defmodule AntFarmWeb.AntFarmLiveView do
     {:noreply, assign(socket, ants: ants)}
   end
 
-  def handle_info(:end_panick, socket) do
+  def handle_info(:chill, socket) do
     {:noreply, assign(socket, panick: false)}
   end
 

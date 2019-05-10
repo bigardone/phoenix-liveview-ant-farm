@@ -12,6 +12,7 @@ main {
   justify-content: center;
   text-shadow: 3px 2px 0px #000000;
   line-height: 2em;
+  flex-direction: column;
 }
 
 a {

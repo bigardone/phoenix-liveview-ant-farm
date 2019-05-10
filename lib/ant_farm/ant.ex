@@ -33,10 +33,10 @@ defmodule AntFarm.Ant do
 
   @impl true
   def handle_info(:perform_actions, state) do
-    state = Behaviour.process(state)
+    new_state = Behaviour.process(state)
     schedule()
 
-    {:noreply, state}
+    {:noreply, new_state}
   end
 
   @impl true
