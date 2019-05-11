@@ -14,7 +14,7 @@ defmodule AntFarm.Ant.State do
   @states [@walking_state, @resting_state]
   @velocity [-1, 0, 1]
   @speed 1
-  @panick_speed 2.5
+  @panic_speed 2.5
   @width Application.get_env(:ant_farm, :colony)[:width]
   @height Application.get_env(:ant_farm, :colony)[:height]
 
@@ -90,7 +90,7 @@ defmodule AntFarm.Ant.State do
       | state: @panicking_state,
         focus: random_focus(@panicking_state),
         velocity: {vx * -1, vy * -1},
-        speed: @panick_speed
+        speed: @panic_speed
     }
 
   @doc """

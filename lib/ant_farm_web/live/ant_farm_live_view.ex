@@ -14,14 +14,14 @@ defmodule AntFarmWeb.AntFarmLiveView do
   def mount(_session, socket) do
     if connected?(socket), do: schedule()
     ants = Colony.ants()
-    {:ok, assign(socket, panick: false, ants: ants)}
+    {:ok, assign(socket, panic: false, ants: ants)}
   end
 
   @impl true
   def handle_event("tap", _value, socket) do
-    Colony.panick()
+    Colony.panic()
     Process.send_after(self(), :chill, 1000)
-    {:noreply, assign(socket, panick: true)}
+    {:noreply, assign(socket, panic: true)}
   end
 
   def handle_info(:tick, socket) do
@@ -31,7 +31,7 @@ defmodule AntFarmWeb.AntFarmLiveView do
   end
 
   def handle_info(:chill, socket) do
-    {:noreply, assign(socket, panick: false)}
+    {:noreply, assign(socket, panic: false)}
   end
 
   defp schedule do

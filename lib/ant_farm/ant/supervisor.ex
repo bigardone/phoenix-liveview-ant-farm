@@ -48,10 +48,10 @@ defmodule AntFarm.Ant.Supervisor do
   @doc """
   Makes all ants go crazy!
   """
-  def panick do
+  def panic do
     __MODULE__
     |> DynamicSupervisor.which_children()
-    |> Enum.each(&do_panick/1)
+    |> Enum.each(&do_panic/1)
   end
 
   defp generate_id do
@@ -64,7 +64,5 @@ defmodule AntFarm.Ant.Supervisor do
     Ant.get_state(pid)
   end
 
-  defp do_panick({_, pid, _, _}) do
-    Ant.panick(pid)
-  end
+  defp do_panic({_, pid, _, _}), do: Ant.panic(pid)
 end

@@ -55,9 +55,6 @@ defmodule AntFarm.Ant.Behaviour do
     |> State.set_position(position)
   end
 
-  def panick(%State{state: :panicking} = state), do: state
-  def panick(state), do: State.start_panicking(state)
-
   defp calculate_velocity(%State{position: {x, y}, velocity: {vx, vy}, speed: speed}) do
     new_x = x + vx * speed
     new_y = y + vy * speed

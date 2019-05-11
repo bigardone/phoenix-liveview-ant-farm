@@ -18,7 +18,7 @@ defmodule AntFarm.Ant do
 
   def get_state(pid), do: GenServer.call(pid, :get_state)
 
-  def panick(pid), do: GenServer.cast(pid, :panick)
+  def panic(pid), do: GenServer.cast(pid, :panic)
 
   @impl true
   def init(id) do
@@ -40,10 +40,12 @@ defmodule AntFarm.Ant do
   end
 
   @impl true
-  def handle_cast(:panick, state) do
-    state = Behaviour.panick(state)
-
+  def handle_cast(:panic, %State{state: :panicking} = state) do
     {:noreply, state}
+  end
+
+  def handle_cast(:panic, state) do
+    {:noreply, State.start_panicking(state)}
   end
 
   defp name(id), do: String.to_atom("ant::" <> id)
